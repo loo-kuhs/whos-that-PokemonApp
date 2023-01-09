@@ -1,4 +1,4 @@
-<script src="./PokePage.ts" />
+<script src="./PokePage.ts" lang="ts" />
 
 <template>
   <h1 v-if="!pokemon">Wait a moment, please...</h1>

@@ -1,0 +1,45 @@
+<template>
+  <div class="options-container">
+    <ul>
+      <li
+        v-for="pokemon in pokemons"
+        :key="pokemon.id"
+        @click="$emit('selectionPokemon', pokemon.id)"
+      >
+        {{ pokemon.name }}
+      </li>
+    </ul>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { Pokemon } from "../interfaces/pokemon";
+
+defineProps<{
+  pokemons: Pokemon[];
+}>();
+</script>
+
+<style scoped>
+ul {
+  list-style-type: none;
+}
+
+li {
+  background-color: white;
+  border-radius: 0.3125rem;
+  border: 0.0625rem solid rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  margin-bottom: 0.625rem;
+  width: 15.625rem;
+}
+
+li:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.options-container {
+  display: flex;
+  justify-content: center;
+}
+</style>

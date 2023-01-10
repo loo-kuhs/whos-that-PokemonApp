@@ -21,10 +21,11 @@ const { pokemonArray: pokemons, checkAnswer } = usePokemons();
 <style scoped>
 ul {
   list-style-type: none;
+  padding: 0;
 }
 
 li {
-  background-color: white;
+  background-color: #E93124;
   border-radius: 0.3125rem;
   border: 0.0625rem solid rgba(0, 0, 0, 0.2);
   cursor: pointer;
@@ -33,7 +34,7 @@ li {
 }
 
 li:hover {
-  background-color: rgba(0, 0, 0, 0.05);
+  background-color: #86c7dc44;
 }
 
 .options-container {

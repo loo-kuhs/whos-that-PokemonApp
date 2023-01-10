@@ -1,4 +1,6 @@
 :root {
+  --title-text-color: #fdcc03;
+  --text-border: #3b62a6;
   --text-color: #2b2121;
   --bg-color: #f1f1f1;
 }
@@ -16,4 +18,10 @@ body {
   color: var(--text-color);
   margin-top: 3.75rem;
   text-align: center;
+}
+
+h1 {
+  text-shadow: -3px 0px 0px var(--text-border), 3px 0px 0px var(--text-border),
+    0px -2px 0px var(--text-border), 0px 3px 0px var(--text-border);
+  color: var(--title-text-color);
 }

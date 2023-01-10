@@ -1,6 +1,9 @@
 import { defineComponent, ref } from "vue";
+
 import PokeOptions from "../components/PokeOptions.vue";
 import PokePicture from "../components/PokePicture.vue";
+
+import { usePokemonStore } from "../store/pokemonStore";
 
 import getPokemonOptions from "../helpers/getPokemonOptions";
 import { Pokemon } from "../interfaces/pokemon";
@@ -12,6 +15,8 @@ export default defineComponent({
     PokePicture,
   },
   setup: () => {
+    const pokemonStore = usePokemonStore();
+
     const pokemonArray = ref<Pokemon[]>([]);
     const pokemon = ref<Pokemon>();
     const showPokemon = ref(false);

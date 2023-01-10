@@ -7,6 +7,7 @@ import { usePokemonStore } from "../store/pokemonStore";
 
 import getPokemonOptions from "../helpers/getPokemonOptions";
 import { Pokemon } from "../interfaces/pokemon";
+import { storeToRefs } from "pinia";
 
 export default defineComponent({
   name: "PokePage",
@@ -16,38 +17,30 @@ export default defineComponent({
   },
   setup: () => {
     const pokemonStore = usePokemonStore();
-
-    const pokemonArray = ref<Pokemon[]>([]);
-    const pokemon = ref<Pokemon>();
-    const showPokemon = ref(false);
-    const showAnswer = ref(false);
-    const message = ref("");
+    const { pokemonArray, pokemon, showPokemon, showAnswer, message } =
+      storeToRefs(pokemonStore);
 
     const mixPokemonArray = async () => {
-      pokemonArray.value = await getPokemonOptions();
+      pokemonStore.loadPokemons(await getPokemonOptions());
 
       const randomInt = Math.floor(Math.random() * 4);
-      pokemon.value = pokemonArray.value[randomInt];
+      pokemonStore.setHiddenPokemon(pokemonArray.value[randomInt]);
     };
 
     const checkAnswer = (selectedId: number) => {
       if (!pokemon.value) return;
 
-      showPokemon.value = true;
-      showAnswer.value = true;
-
       if (selectedId === pokemon.value.id) {
-        message.value = `Correct!, ${pokemon.value.name}`;
+        pokemonStore.showPokemonAndAnswer(`Correct!, ${pokemon.value.name}`);
       } else {
-        message.value = `Wrong!, ${pokemon.value.name}`;
+        pokemonStore.showPokemonAndAnswer(
+          `Wrong!, it was ${pokemon.value.name}`
+        );
       }
     };
 
     const newGame = () => {
-      showPokemon.value = false;
-      showAnswer.value = false;
-      pokemonArray.value = [];
-      pokemon.value = undefined;
+      pokemonStore.clearState();
       mixPokemonArray();
     };
 
